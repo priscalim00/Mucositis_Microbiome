@@ -1,5 +1,7 @@
 data/references/*
 !README.md
+!*.bash
 
 data/raw/*
 !README.md
+!*.bash

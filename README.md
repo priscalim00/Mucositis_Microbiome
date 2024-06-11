@@ -1,5 +1,8 @@
 # Mucositis Microbiome
-Investigation on the role of microbiome in patients who developed mucositis while under going allogeneic hematopoietic stem cell transplant (allo HSCT)
+Investigation on the role of microbiome in patients who developed mucositis while under going
+allogeneic hematopoietic stem cell transplant (allo HSCT). Stool and oral samples were collected
+over time spanning 40 days pre-transplant up to two years post-transplant. Samples underwent 16S
+rRNA amplicon sequencing to produce the raw files that will go into this analysis.
 
 ## Navigating this repository:
 ```
