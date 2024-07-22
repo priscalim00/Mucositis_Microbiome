@@ -8,8 +8,7 @@
 #SBATCH --mail-type=fail
 #SBATCH --mail-user=prisca@live.unc.edu
 
-# This script works to import all reads into QIIME, creating a QIIME artifact that can be used in DADA2 and 
-# QIIME's feature classifer
+# This script runs DADA2 which functions to filter reads, merge, denoise and remove chimeras
 
 module purge
 module load qiime2/2022.2
@@ -19,8 +18,8 @@ QZV=data/qiime/QZV
 
 qiime dada2 denoise-paired \
     --i-demultiplexed-seqs "$QZA"/paired_end_demux.qza \
-    --p-trunc-len-f 120 \
-    --p-trunc-len-r 120 \
+    --p-trunc-len-f 0 \
+    --p-trunc-len-r 0 \
     --p-n-threads 0 \
     --o-representative-sequences "$QZA"/seqs.qza \
     --o-table "$QZA"/table.qza \
