@@ -14,7 +14,7 @@ module load anaconda/2021.11
 conda_envs=/users/p/r/prisca/miniconda3/envs
 conda activate "$conda_envs"/kraken2bracken
 
-bracken_dir=data/working/kracken_bracken/bracken
+bracken_dir=data/working/kraken_bracken/bracken
 
 python "$conda_envs"/kraken2bracken/bin/combine_bracken_outputs.py \
         --files "$bracken_dir"/*_bracken_species.output \

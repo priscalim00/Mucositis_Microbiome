@@ -5,7 +5,7 @@
 #SBATCH --mem=16g
 #SBATCH -n 12
 #SBATCH -t 1-
-#SBATCH --mail-type=all
+#SBATCH --mail-type=fail
 #SBATCH --mail-user=prisca@live.unc.edu
 
 # This script works to import all reads into QIIME, creating a QIIME artifact that can be used in DADA2 and 
@@ -14,17 +14,9 @@
 module purge
 module load qiime2/2022.2
 
-reads=data/qiime/reads
 QZA=data/qiime/QZA
 QZV=data/qiime/QZV 
 
-mkdir -p $QZA
-mkdir -p $QZV 
-
-cp -uv data/working/trimmed/*.fastq.gz "$reads"
-
-qiime tools import \
-  --type 'SampleData[PairedEndSequencesWithQuality]' \
-  --input-path "$reads" \
-  --input-format CasavaOneEightSingleLanePerSampleDirFmt \
-  --output-path "$QZA"/
+qiime demux summarize \
+ --i-data "$QZA"/paired_end_demux.qza \
+ --o-visualization "$QZV"/quality_report.qzv
