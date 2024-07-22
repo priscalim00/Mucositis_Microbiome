@@ -1,7 +1,7 @@
-data/references/*
-!README.md
-!*.bash
+data/*
+!data/references/README.md
+!data/references/*.bash
+!data/raw/README.md
+!data/raw/*bash
 
-data/raw/*
-!README.md
-!*.bash
+slurm-*

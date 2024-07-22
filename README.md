@@ -1,35 +1,28 @@
-# Mucositis Microbiome
-Investigation on the role of microbiome in patients who developed mucositis while under going
-allogeneic hematopoietic stem cell transplant (allo HSCT). Stool and oral samples were collected
-over time spanning 40 days pre-transplant up to two years post-transplant. Samples underwent 16S
-rRNA amplicon sequencing to produce the raw files that will go into this analysis.
+# Duke HCT cohort - Stool 16S samples
+The samples in this analysis were collected by the Sung Lab at Duke and sequenced by MSKCC targeting the V4-V5 region of the 16S gene.
 
-## Navigating this repository:
-```
-project
-|- README           # the top level description of content (this doc)
-|
-|- data             # raw and primary data, are not changed once created
-| |- references/    # reference files such as reference genomes or taxonomic databases
-| |- raw/           # raw data files or instructions on how to obtain them
-| |- processed/     # cleaned data, used to generate figures
-| |- working/       # copies of raw data files being worked on or intermediate files required for downstream analysis            
-|
-|- code/            # scripts with detailed comments for analyses and figure generation
-|
-|- results          # all output from workflows and analyses
-| |- tables/        # text version of tables to be rendered with kable in R
-| |- figures/       # graphs, likely designated for manuscript figures
-|
-|- submission/
-| |- manuscript.Rmd # executable Rmarkdown for this study, containing code that generates relevant figures
-| |- study.md       # Markdown (GitHub) version of the *.Rmd file
-| |- study.pdf      # PDF version of *.Rmd file
-| |- citations.bib  # BibTeX formatted references
-|
-|- exploratory/     # exploratory data analysis for study
-| |- notebook/      # preliminary analyses
-|
-+- Makefile         # executable Makefile for this study, if applicable
-```
+Raw sample files are found under "/proj/andermannlab/working_files/Duke_16s/Raw_Sequencing/". 
+I've renamed the sample files to contain TpID_Timepoint according to `data/sample_manifest.csv`
+Note: Some of the raw files only include *.forward.fastq.gz without the corresponding *.reverse.fastq.gz file. 
+      Those samples have been excluded from this directory for now. This directory represents 445 patients and 1360 samples
 
+## Workflow:
+Step 1 - Preprocessing of reads
+1) Generate FastQC & MultiQC reports for all sample files
+2) Trim adaptors and low quality reads (TrimGalore)
+3) Re-generate FastQC/MultiQC reports to ensure trimming worked
+
+Step 2 - Running QIIME
+1) Import reads as QIIME artifact (Do this in batches of about 100-200 samples so that DADA2 doesn't take forever)
+2) Denoise and remove chimeras using DADA2
+3) Assign taxonomy 
+
+Step 3 - Export QIIME artifacts
+1) Feature table
+2) Representative sequences (ASVs) 
+3) Taxonomy
+
+Step 4 - Taxonomic assignment using Kraken2/Bracken
+*This step is optional but Bracken is able to estimate species-level abundance which makes it easier to compare
+with shotgun sequencing samples
+1) Use QC/trimmed reads as input files for Kraken2/Bracken
