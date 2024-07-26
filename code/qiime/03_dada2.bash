@@ -2,10 +2,10 @@
 
 #SBATCH -p general
 #SBATCH -N 1
-#SBATCH --mem=128g
-#SBATCH -n 64
+#SBATCH --mem 512g
+#SBATCH -n 128
 #SBATCH -t 2-
-#SBATCH --mail-type=fail
+#SBATCH --mail-type=all
 #SBATCH --mail-user=prisca@live.unc.edu
 
 # This script runs DADA2 which functions to filter reads, merge, denoise and remove chimeras
